@@ -95,3 +95,11 @@ This repository starts private. Matthew decides if and when it becomes public. B
 Built for the one person the internet has been criminally under-covering.
 
 You, obviously.
+
+## More about me. Finally.
+
+Built by [Matt Berman](https://x.com/TheMattBerman). Apparently one internet wasn't enough.
+
+- **X:** [@TheMattBerman](https://x.com/TheMattBerman) · More things I built instead of logging off.
+- **Newsletter:** [Big Players](https://bigplayers.co) · How the biggest brands play the game.
+- **Agency:** [Emerald Digital](https://emerald.digital) · We make your brand the main character too.
