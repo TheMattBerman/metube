@@ -84,6 +84,10 @@ npm test
 
 Runtime needs no npm install or remote script loading. The bundled vision assets make the extension download fairly large. Krea requests require internet access and your own fal account.
 
+## Reviewed, even though the ego said it was unnecessary
+
+[Claude Sonnet 5.5 approved the private beta](docs/REVIEW.md) after three review passes and fixes. The clean-package checks pass: 8 Node cases plus 13 worker assertions. The review is static source review; provider quality still depends on the image and Krea.
+
 ## Private means private
 
 This repository starts private. Matthew decides if and when it becomes public. Before a public release, choose the project license, confirm the original ZIP's redistribution rights and bundled model terms, and review the [release notes](docs/RELEASE.md). Third-party notices are in [THIRD_PARTY.md](THIRD_PARTY.md).
