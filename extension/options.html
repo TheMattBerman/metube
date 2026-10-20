@@ -1,0 +1,63 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>MeTube</title>
+<link rel="stylesheet" href="options.css">
+</head><body>
+<div class="bg"><i></i><i></i><i></i></div>
+<main class="card">
+  <header>
+    <div class="logo"><span class="play"></span><span class="word">Me<i>Tube</i></span></div>
+    <label class="switch" title="Enable MeTube"><input id="enabled" type="checkbox" checked><span></span></label>
+  </header>
+  <p class="tag">finally the internet is about the only thing i really care about. <b>me.</b></p>
+
+  <section>
+    <div id="drop" class="drop" tabindex="0">
+      <img id="preview" alt="">
+      <div class="hint"><div class="plus">＋</div><b>Drop your selfie</b><span>or click to upload · front-facing, well lit</span></div>
+      <input id="selfie" type="file" accept="image/*" hidden>
+    </div>
+  </section>
+
+  <section class="field">
+    <label for="falKey">fal API key</label>
+    <div class="keywrap"><input id="falKey" type="password" placeholder="key_id:key_secret" autocomplete="off" spellcheck="false"><button id="eye" class="ghost" type="button">show</button></div>
+    <small>Stored locally in chrome.storage. Sent only to queue.fal.run · model <code>krea/v3/edit</code></small>
+  </section>
+
+  <section class="row">
+    <div class="field"><label for="maxThumbs">Thumbnails / page <output id="maxOut">12</output></label><input id="maxThumbs" type="range" min="1" max="48" value="12"></div>
+    <div class="field"><label for="concurrency">Parallel <output id="concOut">3</output></label><input id="concurrency" type="range" min="1" max="3" value="3"></div>
+  </section>
+  <div class="cost"><b id="cost">12 edits max</b> per page · fal bills each new generation</div><section class="field"><label for="hourlyLimit">New generation attempts / hour (all tabs)</label><input id="hourlyLimit" type="number" min="1" max="100" value="12"><small>Cached results and Before/After do not consume this limit. Requests reserved before a failure still count.</small></section>
+
+  <section class="field">
+    <label>Krea 3 variant</label>
+    <div class="seg" id="model"><button data-v="berry" class="on">Berry · quality</button><button data-v="jam">Jam · speed</button></div>
+  </section>
+
+  <details class="field"><summary>Additional prompt direction (optional)</summary><textarea id="prompt" rows="5"></textarea><small>&lt;image-1&gt; = thumbnail, &lt;image-2&gt; = you</small></details>
+
+  <section class="field">
+    <label for="testVideo">Preview one thumbnail</label>
+    <input id="testVideo" type="text" value="https://www.youtube.com/watch?v=b2tjnxX8IHU">
+    <small>Uses your saved selfie and key. Uses a saved preview for identical settings, or submits one Krea edit. Automatic head selection runs locally; the feed stays paused.</small>
+    <button id="testOne" class="primary" type="button">Test one image</button>
+    <p id="testStatus" role="status"></p>
+    <div id="testResult" hidden>
+      <p>Original</p><img id="testOriginal" alt="Original thumbnail" style="width:100%">
+      <p>Identity crop used</p><img id="testReference" alt="Reference face crop" style="max-width:180px">
+      <p>New result</p><img id="testOutput" alt="Krea 3 preview" style="width:100%">
+    </div>
+
+  </section>
+
+  <details class="field"><summary>Saved request recovery</summary><p>Queued requests resume automatically. For failed or unknown submissions, check your fal request history first. Forgetting a receipt may create a duplicate charge on a future attempt.</p><button id="listJobs" type="button">List saved requests</button><select id="jobs" aria-label="Saved requests"></select><label><input type="checkbox" id="duplicateRisk"> I understand a future attempt may be billed again.</label><button id="forgetJob" type="button">Forget selected receipt</button><p id="jobStatus" role="status"></p></details>
+  <footer>
+    <span id="stat" class="stat">0 thumbnails made about you</span>
+    <div><button id="clear" class="ghost">Clear cache</button><button id="save" class="primary">Save</button></div>
+  </footer>
+</main>
+<div id="toast" class="toast"></div>
+<script src="quality.js"></script>
+<script src="options.js"></script>
+</body></html>

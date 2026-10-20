@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.zip
+.DS_Store
+.env*
+*-receipt.json
+approved-reference.jpg
+selfie.jpg
+selfie.jpeg
+selfie.png
+selfie.heic
+reference.jpg

@@ -1,0 +1,55 @@
+/* MeTube: on-camera polish */
+@property --mt-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+:root { --mt-g: linear-gradient(135deg, #ff2d55, #ff7a18 35%, #ffd60a 55%, #7c3aed 80%, #ff2d55); }
+
+/* pending: desaturate + shimmer sweep + rotating gradient ring */
+ytd-thumbnail:has(img.metube-pending), yt-thumbnail-view-model:has(img.metube-pending) { position: relative; isolation: isolate; }
+ytd-thumbnail:has(img.metube-pending)::before, yt-thumbnail-view-model:has(img.metube-pending)::before {
+  content: ""; position: absolute; inset: -3px; border-radius: 15px; z-index: -1;
+  background: conic-gradient(from var(--mt-angle), #ff2d55, #ff7a18, #ffd60a, #7c3aed, #ff2d55);
+  filter: blur(6px); opacity: .9; animation: mtSpin 1.6s linear infinite;
+}
+ytd-thumbnail:has(img.metube-pending)::after, yt-thumbnail-view-model:has(img.metube-pending)::after {
+  content: "✦ becoming you…"; position: absolute; inset: 0; border-radius: 12px; z-index: 2; pointer-events: none;
+  display: grid; place-items: center; color: #fff; font: 600 13px/1 Inter, "YouTube Sans", Roboto, sans-serif; letter-spacing: .3px;
+  text-shadow: 0 1px 8px rgba(0,0,0,.6);
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%) 0 0/250% 100%, rgba(10,10,20,.25);
+  animation: mtShimmer 1.4s ease-in-out infinite;
+}
+img.metube-pending { filter: saturate(.3) blur(2px) brightness(.85); transform: scale(.985); transition: filter .5s, transform .5s; }
+
+/* reveal: flash, unblur, overshoot pop, glow fade */
+img.metube-done { animation: mtReveal .9s cubic-bezier(.2,1.4,.3,1) both; border-radius: 12px; }
+ytd-thumbnail:has(img.metube-done), yt-thumbnail-view-model:has(img.metube-done) { animation: mtGlow 1.6s ease-out both; border-radius: 12px; }
+
+@keyframes mtSpin { to { --mt-angle: 360deg; } }
+@keyframes mtShimmer { from { background-position: 150% 0, 0 0; } to { background-position: -100% 0, 0 0; } }
+@keyframes mtReveal {
+  0% { filter: blur(14px) brightness(2.2) saturate(1.6); transform: scale(.94); clip-path: inset(0 0 0 0 round 12px); }
+  60% { filter: blur(0) brightness(1.1); transform: scale(1.03); }
+  100% { filter: none; transform: none; }
+}
+@keyframes mtGlow {
+  0% { box-shadow: 0 0 0 0 rgba(255,45,85,.0); }
+  25% { box-shadow: 0 0 28px 6px rgba(255,90,60,.65), 0 0 60px 10px rgba(124,58,237,.35); }
+  100% { box-shadow: 0 0 0 0 rgba(255,45,85,0); }
+}
+
+/* logo */
+.metube-logo { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 4px; user-select: none; }
+.metube-logo .mt-play {
+  width: 30px; height: 21px; border-radius: 6px; display: grid; place-items: center; position: relative;
+  background: var(--mt-g); background-size: 300% 300%; animation: mtFlow 6s ease infinite;
+  box-shadow: 0 0 14px rgba(255,60,90,.55);
+}
+.metube-logo .mt-play::after { content: ""; border-left: 8px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
+.metube-logo .mt-word {
+  font: 800 21px/1 Inter, "YouTube Sans", Roboto, sans-serif; letter-spacing: -1.1px;
+  background: var(--mt-g); background-size: 300% 300%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: mtFlow 6s ease infinite;
+}
+.metube-logo .mt-word i { font-style: normal; color: var(--yt-spec-text-primary, #0f0f0f); -webkit-text-fill-color: var(--yt-spec-text-primary, #0f0f0f); }
+.metube-logo.mt-intro { animation: mtLogoIn .8s cubic-bezier(.2,1.5,.3,1) both; }
+@keyframes mtLogoIn { from { opacity: 0; transform: translateY(-6px) scale(.8); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes mtFlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .metube-logo *, img.metube-done, .metube-logo { animation: none !important; } }
